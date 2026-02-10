@@ -18,7 +18,7 @@ const Footer: React.FC = () => {
             </div>
             <p className="text-gray-500 text-sm">
               Qualidade e tradição para os guerreiros do tatame.
-              <br/>Fornecedor CheckMat Brasil.
+              <br/>Fornecedor Oficial CheckMat Brasil.
             </p>
           </div>
 
