@@ -29,6 +29,17 @@ const ProductDetailsModal: React.FC<ProductDetailsModalProps> = ({ isOpen, produ
     return `Em até 6x de ${formatBRL(perInstallment)} sem juros (Visa e MasterCard).`;
   }, [product]);
 
+  const personalizeLines = useMemo(() => {
+    if (!product) return [] as string[];
+    if (product.category !== 'faixas') return [] as string[];
+
+    if (product.beltAudience === 'kids') {
+      return ['Nome bordado + R$ 20,00', 'Com divisa/listra: + R$ 12,00'];
+    }
+
+    return ['Nome bordado + R$ 25,00', 'Graus bordados: R$ 9,00 cada grau bordado'];
+  }, [product]);
+
   if (!isOpen || !product) return null;
 
   return (
@@ -58,6 +69,17 @@ const ProductDetailsModal: React.FC<ProductDetailsModalProps> = ({ isOpen, produ
             <div className="text-3xl font-bold text-honra-black mb-4">{formatBRL(product.price)}</div>
 
             <p className="text-gray-700 leading-relaxed mb-6">{product.description}</p>
+
+            {personalizeLines.length > 0 && (
+              <div className="mb-6">
+                <div className="text-xs text-gray-400 font-bold uppercase tracking-widest mb-2">Personalize</div>
+                <div className="space-y-1 text-sm text-gray-700">
+                  {personalizeLines.map((line) => (
+                    <p key={line}>{line}</p>
+                  ))}
+                </div>
+              </div>
+            )}
 
             <div className="space-y-2 text-sm">
               <p className="text-honra-black font-semibold">{installmentText}</p>

@@ -5,6 +5,7 @@ export interface Product {
   price: number;
   image: string;
   description: string;
+  beltAudience?: 'adult' | 'kids';
   isFeatured?: boolean;
 }
 

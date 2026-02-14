@@ -12,6 +12,8 @@ import fotoJiuPreto1 from "./assets/jiu/jiuPreto.jpeg";
 import fotoKid1 from "./assets/kids/kid1.jpeg";
 import fotoTaek1 from "./assets/taek/taek1.jpeg";
 import fotoFaixas1 from "./assets/faixas/faixas1.jpeg";
+import fotoFaixaKids1 from "./assets/faixas/faixaKids.jpeg";
+import fotoFaixaKids2 from "./assets/faixas/faixaKidsBranca.jpeg";
 
 export const CONTACT_INFO = {
   address: "Avenida Por do Sol, 527, Jardim Panorama - Foz do Iguaçu - Paraná",
@@ -158,11 +160,32 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: "6",
-    name: "Faixa Especial - Edição Autismo",
+    name: "Faixa Honra Premium - Edição Autismo",
     category: "faixas",
     price: 140.0,
     image: FOTO_5_FAIXA,
-    description: "Faixa preta premium com ponteira personalizada Puzzle.",
+    description: "Confeccionada com E.V.A de confecção com tratamento antibacteriano e antimicrobiano, 8 costuras, 5cm de largura, 5mm de espessura e escapada em tecido algodão.",
+    beltAudience: "adult",
     isFeatured: true,
+  },
+  {
+    id: "11",
+    name: "Faixa Kids Honra - Modelo 1",
+    category: "faixas",
+    price: 120.0,
+    image: fotoFaixaKids1,
+    description: "Faixa kids com costura reforçada e acabamento premium.",
+    beltAudience: "kids",
+    isFeatured: true,
+  },
+  {
+    id: "12",
+    name: "Faixa Kids Honra - Modelo 2",
+    category: "faixas",
+    price: 120.0,
+    image: fotoFaixaKids2,
+    description: "Faixa kids com costura reforçada e acabamento premium.",
+    beltAudience: "kids",
+    isFeatured: false,
   },
 ];
