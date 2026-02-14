@@ -1,13 +1,18 @@
-import React from 'react';
+import React, { useMemo, useState } from 'react';
 import { ShoppingCart, Star, MessageCircle } from 'lucide-react';
 import { PRODUCTS, CONTACT_INFO } from '../constants';
 import { Product } from '../types';
+import ProductDetailsModal from './ProductDetailsModal';
 
 interface ProductShowcaseProps {
   onAddToCart: (product: Product) => void;
 }
 
 const ProductShowcase: React.FC<ProductShowcaseProps> = ({ onAddToCart }) => {
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const featuredProducts = useMemo(() => PRODUCTS.filter((p) => p.isFeatured), []);
   
   const getWhatsAppLink = (productName: string) => {
     const text = `Olá, gostei do produto *${productName}* no site e gostaria de mais informações para comprar.`;
@@ -30,8 +35,23 @@ const ProductShowcase: React.FC<ProductShowcaseProps> = ({ onAddToCart }) => {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-          {PRODUCTS.filter(p => p.isFeatured).map((product) => (
-            <div key={product.id} className="bg-white rounded-lg shadow-md hover:shadow-2xl transition-all duration-300 border border-gray-100 overflow-hidden flex flex-col group">
+          {featuredProducts.map((product) => (
+            <div
+              key={product.id}
+              className="bg-white rounded-lg shadow-md hover:shadow-2xl transition-all duration-300 border border-gray-100 overflow-hidden flex flex-col group cursor-pointer"
+              role="button"
+              tabIndex={0}
+              onClick={() => {
+                setSelectedProduct(product);
+                setIsModalOpen(true);
+              }}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  setSelectedProduct(product);
+                  setIsModalOpen(true);
+                }
+              }}
+            >
               <div className="relative h-80 overflow-hidden bg-gray-100">
                  <img 
                   src={product.image} 
@@ -64,7 +84,10 @@ const ProductShowcase: React.FC<ProductShowcaseProps> = ({ onAddToCart }) => {
                   
                   <div className="grid grid-cols-5 gap-2">
                     <button 
-                      onClick={() => onAddToCart(product)}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        onAddToCart(product);
+                      }}
                       className="col-span-1 p-3 border border-gray-300 text-gray-600 rounded hover:bg-gray-100 transition-all flex items-center justify-center"
                       title="Adicionar ao Carrinho"
                     >
@@ -72,6 +95,7 @@ const ProductShowcase: React.FC<ProductShowcaseProps> = ({ onAddToCart }) => {
                     </button>
                     
                     <a 
+                      onClick={(e) => e.stopPropagation()}
                       href={getWhatsAppLink(product.name)}
                       target="_blank" 
                       rel="noopener noreferrer"
@@ -87,6 +111,12 @@ const ProductShowcase: React.FC<ProductShowcaseProps> = ({ onAddToCart }) => {
           ))}
         </div>
       </div>
+
+      <ProductDetailsModal
+        isOpen={isModalOpen}
+        product={selectedProduct}
+        onClose={() => setIsModalOpen(false)}
+      />
     </section>
   );
 };

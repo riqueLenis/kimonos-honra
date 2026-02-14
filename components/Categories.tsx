@@ -11,7 +11,7 @@ const Categories: React.FC = () => {
           </h2>
           <div className="w-24 h-1 bg-honra-red mx-auto"></div>
           <p className="mt-4 text-gray-600 max-w-2xl mx-auto">
-            Desenvolvemos equipamentos específicos para cada arte marcial, respeitando a tradição e inovando na tecnologia.
+            Desenvolvemos Kimonos e Dobok's com matéria prima <strong>100% nacional</strong>
           </p>
         </div>
 
